@@ -11,7 +11,7 @@ keras==2.2.4
 ## 1. Data preparation
 The dataset is BQ.  
 @inproceedings{chen-etal-2018-bq,  
-    title = "The {BQ} Corpus: A Large-scale Domain-specific {C}hinese Corpus For Sentence Semantic Equivalence Identification",  
+    title = "The BQ Corpus: A Large-scale Domain-specific Chinese Corpus For Sentence Semantic Equivalence Identification",  
     author = "Chen, Jing  and
       Chen, Qingcai  and
       Liu, Xin  and
