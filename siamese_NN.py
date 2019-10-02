@@ -35,20 +35,20 @@ embedding_layer = Embedding(embedding_matrix.shape[0],
                             trainable=False)
 
 def base_network(input_shape):
-    input = Input(shape=input_shape)
+    input_ = Input(shape=input_shape)
 
-    p = embedding_layer(input)    
+    p = embedding_layer(input_)    
 
-    p = Bidirectional(LSTM(400, return_sequences=True, dropout=drop),merge_mode='sum')(p)
+    p = Bidirectional(LSTM(300, return_sequences=True, dropout=drop),merge_mode='sum')(p)
 
 
-    q = embedding_layer(input)       
+    q = embedding_layer(input_)       
 
-    q = Bidirectional(LSTM(400, return_sequences=True,dropout=drop),merge_mode='sum')(q)   
+    q = Bidirectional(LSTM(300, return_sequences=True,dropout=drop),merge_mode='sum')(q)   
     
     ad = concatenate([p,q])
     
-    return Model(input, ad, name='review_base_nn')
+    return Model(input_, ad, name='review_base_nn')
 
 def f1_score(y_true, y_pred):
 
@@ -119,13 +119,13 @@ def siamese_model():
     
     processed_q1 = base_net([input_q1])
     
-    z1 = Conv1D(400,3)(processed_q1)
+    z1 = Conv1D(300,3)(processed_q1)
         
     # Creating LSTM Encoder layer for Second Sentence
     input_q2 = Input(shape=input_shape, dtype='int32', name='sequence2')
     
     processed_q2 = base_net([input_q2])
-    z2 = Conv1D(400,3)(processed_q2)
+    z2 = Conv1D(300,3)(processed_q2)
 
 
     #doing matching
