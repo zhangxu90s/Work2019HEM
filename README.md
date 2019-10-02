@@ -25,4 +25,6 @@ The dataset is BQ.
     publisher = "Association for Computational Linguistics",
     doi = "10.18653/v1/D18-1536",
     pages = "4946--4951",
-}
+}  
+## 2. Start the training process
+python siamese_NN.py  
