@@ -106,12 +106,7 @@ def recall(y_true, y_pred):
 
 def mse_loss(y_true, y_pred):
     return K.mean(K.square(y_true - y_pred))
-margin = 0.6
-theta = lambda t: (K.sign(t)+1.)/2.
-def loss(y_true, y_pred):
-    return  (1 - theta(y_true - margin) * theta(y_pred - margin) 
-              - theta(1 - margin - y_true) * theta(1 - margin - y_pred)
-              ) *(K.mean(K.square(y_true - y_pred)))
+  
 def siamese_model():
     input_shape = (input_dim,)
     
