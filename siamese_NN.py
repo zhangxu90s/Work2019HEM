@@ -129,15 +129,15 @@ def siamese_model():
 
 
     #doing matching
-    z1 = Dense(400)(z1)
-    z1 = Lambda(lambda x: K.sum(x, axis=1), output_shape=(400,))(z1)
-    z2 = Dense(400)(z2)
-    z2 = Lambda(lambda x: K.sum(x, axis=1), output_shape=(400,))(z2)
+    z1 = Dense(300)(z1)
+    z1 = Lambda(lambda x: K.sum(x, axis=1), output_shape=(300,))(z1)
+    z2 = Dense(300)(z2)
+    z2 = Lambda(lambda x: K.sum(x, axis=1), output_shape=(300,))(z2)
 
-    processed_q1 = Dense(400)(processed_q1)
-    processed_q1 = Lambda(lambda x: K.sum(x, axis=1), output_shape=(400,))(processed_q1)
-    processed_q2 = Dense(400)(processed_q2)
-    processed_q2 = Lambda(lambda x: K.sum(x, axis=1), output_shape=(400,))(processed_q2)
+    processed_q1 = Dense(300)(processed_q1)
+    processed_q1 = Lambda(lambda x: K.sum(x, axis=1), output_shape=(300,))(processed_q1)
+    processed_q2 = Dense(300)(processed_q2)
+    processed_q2 = Lambda(lambda x: K.sum(x, axis=1), output_shape=(300,))(processed_q2)
 
     
     s1 = Lambda(lambda x: K.abs(x[0] - x[1]))([processed_q1,processed_q2])
