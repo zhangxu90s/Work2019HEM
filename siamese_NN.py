@@ -39,12 +39,12 @@ def base_network(input_shape):
 
     p = embedding_layer(input)    
 
-    p = Bidirectional(LSTM(300, return_sequences=True, dropout=drop),merge_mode='sum')(p)
+    p = Bidirectional(LSTM(400, return_sequences=True, dropout=drop),merge_mode='sum')(p)
 
 
     q = embedding_layer(input)       
 
-    q = Bidirectional(LSTM(300, return_sequences=True,dropout=drop),merge_mode='sum')(q)   
+    q = Bidirectional(LSTM(400, return_sequences=True,dropout=drop),merge_mode='sum')(q)   
     
     ad = concatenate([p,q])
     
@@ -119,25 +119,25 @@ def siamese_model():
     
     processed_q1 = base_net([input_q1])
     
-    z1 = Conv1D(300,3)(processed_q1)
+    z1 = Conv1D(400,3)(processed_q1)
         
     # Creating LSTM Encoder layer for Second Sentence
     input_q2 = Input(shape=input_shape, dtype='int32', name='sequence2')
     
     processed_q2 = base_net([input_q2])
-    z2 = Conv1D(300,3)(processed_q2)
+    z2 = Conv1D(400,3)(processed_q2)
 
 
     #doing matching
-    z1 = Dense(300)(z1)
-    z1 = Lambda(lambda x: K.sum(x, axis=1), output_shape=(300,))(z1)
-    z2 = Dense(300)(z2)
-    z2 = Lambda(lambda x: K.sum(x, axis=1), output_shape=(300,))(z2)
+    z1 = Dense(400)(z1)
+    z1 = Lambda(lambda x: K.sum(x, axis=1), output_shape=(400,))(z1)
+    z2 = Dense(400)(z2)
+    z2 = Lambda(lambda x: K.sum(x, axis=1), output_shape=(400,))(z2)
 
-    processed_q1 = Dense(300)(processed_q1)
-    processed_q1 = Lambda(lambda x: K.sum(x, axis=1), output_shape=(300,))(processed_q1)
-    processed_q2 = Dense(300)(processed_q2)
-    processed_q2 = Lambda(lambda x: K.sum(x, axis=1), output_shape=(300,))(processed_q2)
+    processed_q1 = Dense(400)(processed_q1)
+    processed_q1 = Lambda(lambda x: K.sum(x, axis=1), output_shape=(400,))(processed_q1)
+    processed_q2 = Dense(400)(processed_q2)
+    processed_q2 = Lambda(lambda x: K.sum(x, axis=1), output_shape=(400,))(processed_q2)
 
     
     s1 = Lambda(lambda x: K.abs(x[0] - x[1]))([processed_q1,processed_q2])
