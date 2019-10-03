@@ -28,7 +28,7 @@ w2v_corpus = [i.split() for i in corpus]
 word_set = set(' '.join(corpus).split())
 
 MAX_SEQUENCE_LENGTH = 30  
-EMB_DIM = 300  
+EMB_DIM = 400  
 
 w2v_model = models.Word2Vec(w2v_corpus, size=EMB_DIM, window=5, min_count=1, sg=1, workers=4, seed=1234, iter=25)
 w2v_model.save('w2v_model.pkl')
