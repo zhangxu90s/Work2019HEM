@@ -143,16 +143,14 @@ def siamese_model():
     s1 = Lambda(lambda x: K.abs(x[0] - x[1]))([processed_q1,processed_q2])
     s2 = Lambda(lambda x: K.abs(x[0] - x[1]))([z1,z2])
     
-    s5 = Lambda(lambda x: K.abs((x[0]-K.mean(x[0],axis=1,keepdims=True)) - (x[1]-K.mean(x[1],axis=1,keepdims=True))))([processed_q1,processed_q2])
-    s7 = Lambda(lambda x: K.abs((x[0]-K.mean(x[0],axis=1,keepdims=True)) - (x[1]-K.mean(x[1],axis=1,keepdims=True))))([z1,z2])
+    s3 = Lambda(lambda x: K.abs((x[0]-K.mean(x[0],axis=1,keepdims=True)) - (x[1]-K.mean(x[1],axis=1,keepdims=True))))([processed_q1,processed_q2])
+    s4 = Lambda(lambda x: K.abs((x[0]-K.mean(x[0],axis=1,keepdims=True)) - (x[1]-K.mean(x[1],axis=1,keepdims=True))))([z1,z2])
+   
+    s5 = multiply([s1,s2])
+    s6 = multiply([s3,s4])
     
-    
-    s3 = multiply([s1,s2])
-
-    s4 = multiply([s5,s7])
-    #distance = Lambda(manhattan_distance, output_shape=distance_output_shape, name='distance')([s1, s5])
-
-    similarity = concatenate([s3,s4])
+    #similarity = concatenate([s1,s3])
+    similarity = concatenate([s5,s6])
     
     similarity = Dense(1)(similarity)
     similarity = BatchNormalization()(similarity)
