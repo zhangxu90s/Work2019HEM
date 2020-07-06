@@ -15,7 +15,7 @@ The dataset is BQ.
 ## 2. Start the training process
 python siamese_NN.py  
 # Reference
-If you find our source is useful, please consider citing our work.
+If you find our source useful, please consider citing our work.
 
 @article{lu2020deep,\
   title={Deep hierarchical encoding model for sentence semantic matching},\
